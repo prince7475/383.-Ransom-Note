@@ -1,0 +1,43 @@
+Given an arbitrary ransom note string and another string 
+containing letters from all the magazines, write a function
+that will return true if the ransom note can be constructed from 
+the magazines ; otherwise, it will return false.
+
+Each letter in the magazine string can only be used once in your ransom note.
+
+Note:
+You may assume that both strings contain only lowercase letters.
+
+canConstruct("a", "b") -> false
+canConstruct("aa", "ab") -> false
+canConstruct("aa", "aab") -> true
+
+-- Using a hashmap
+  -- Loop through mag = {
+    letter : amount of letter
+    }
+    
+    loop through ransom
+    for(letter of ransom){
+      if(!(letter in hashmap) || hashmap[letter] === 0) return false
+      hashmap[letter] = hashmap[letter] - 1
+    }
+    
+    return true
+    Time --> O(n + m)
+    Space --> O(m)
+    
+    function canConstruct(ransom, mag){
+      let hashMap = {}
+      
+      for(let letter of mag){
+        if(!(letter in hashMap)) hashMap[letter] = 0
+        hashMap[letter] += 1
+      }
+      
+      for(let el of ransom){
+        if(!(el in hashMap) || hashMap[el] === 0) return false
+        hashMap[el] = hashMap[el] - 1
+      }
+      return true
+    }
